@@ -42,11 +42,11 @@
                           </BaseButton>
                         </div>
                       </div>
-                      <ProductFilterBlock :loaded="loaded" title="Kategorier" :items="availableFilters.categories" :activeFilters="filters" @toggle-filter="toggleFilter" />
-                      <ProductFilterBlock :loaded="loaded" title="Stil" :items="availableFilters.styles" :activeFilters="filters" @toggle-filter="toggleFilter" />
-                      <ProductFilterBlock :loaded="loaded" title="Bruksområde" :items="availableFilters.applications" :activeFilters="filters" @toggle-filter="toggleFilter" />
-                      <ProductFilterBlock :loaded="loaded" title="Materiale" :items="availableFilters.materials" :activeFilters="filters" @toggle-filter="toggleFilter" />
-                      <ProductFilterBlock :loaded="loaded" title="Farger" :items="availableFilters.colors" :activeFilters="filters" @toggle-filter="toggleFilter">
+                      <ProductFilterBlock :loaded="!fetchState.pending" title="Kategorier" :items="availableFilters.categories" :activeFilters="filters" @toggle-filter="toggleFilter" />
+                      <ProductFilterBlock :loaded="!fetchState.pending" title="Stil" :items="availableFilters.styles" :activeFilters="filters" @toggle-filter="toggleFilter" />
+                      <ProductFilterBlock :loaded="!fetchState.pending" title="Bruksområde" :items="availableFilters.applications" :activeFilters="filters" @toggle-filter="toggleFilter" />
+                      <ProductFilterBlock :loaded="!fetchState.pending" title="Materiale" :items="availableFilters.materials" :activeFilters="filters" @toggle-filter="toggleFilter" />
+                      <ProductFilterBlock :loaded="!fetchState.pending" title="Farger" :items="availableFilters.colors" :activeFilters="filters" @toggle-filter="toggleFilter">
                         <template #box="{ item }">
                           <div :style="`background-color: ${item.color_hex}`" class="w-5 h-5 mr-3 border border-gray-200 rounded-full"></div>
                         </template>
@@ -63,11 +63,11 @@
       <TransformFadeIn>
         <div v-show="filterMenuActive" class="lg:block hidden mt-8">
           <div class="grid grid-cols-5 gap-3">
-            <ProductFilterBlock :loaded="loaded" title="Kategorier" :items="availableFilters.categories" :activeFilters="filters" @toggle-filter="toggleFilter" />
-            <ProductFilterBlock :loaded="loaded" title="Stil" :items="availableFilters.styles" :activeFilters="filters" @toggle-filter="toggleFilter" />
-            <ProductFilterBlock :loaded="loaded" title="Bruksområde" :items="availableFilters.applications" :activeFilters="filters" @toggle-filter="toggleFilter" />
-            <ProductFilterBlock :loaded="loaded" title="Materiale" :items="availableFilters.materials" :activeFilters="filters" @toggle-filter="toggleFilter" />
-            <ProductFilterBlock :loaded="loaded" title="Farger" :items="availableFilters.colors" :activeFilters="filters" @toggle-filter="toggleFilter">
+            <ProductFilterBlock :loaded="!fetchState.pending" title="Kategorier" :items="availableFilters.categories" :activeFilters="filters" @toggle-filter="toggleFilter" />
+            <ProductFilterBlock :loaded="!fetchState.pending" title="Stil" :items="availableFilters.styles" :activeFilters="filters" @toggle-filter="toggleFilter" />
+            <ProductFilterBlock :loaded="!fetchState.pending" title="Bruksområde" :items="availableFilters.applications" :activeFilters="filters" @toggle-filter="toggleFilter" />
+            <ProductFilterBlock :loaded="!fetchState.pending" title="Materiale" :items="availableFilters.materials" :activeFilters="filters" @toggle-filter="toggleFilter" />
+            <ProductFilterBlock :loaded="!fetchState.pending" title="Farger" :items="availableFilters.colors" :activeFilters="filters" @toggle-filter="toggleFilter">
               <template #box="{ item }">
                 <div :style="`background-color: ${item.color_hex}`" class="w-5 h-5 mr-3 border border-gray-200 rounded-full"></div>
               </template>
@@ -106,17 +106,17 @@
               </form>
             </div>
           </section>
-          <div v-if="loaded">
+          <div v-if="fetchState.pending">
+            <section class="animate-pulse sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-4 lg:gap-1 grid w-full grid-cols-1 gap-6 px-3 mt-5">
+              <div v-for="i in 12" :key="i" style="height: 408px" class="w-full bg-gray-400 rounded" />
+            </section>
+          </div>
+          <div v-else>
             <section v-if="products.length > 0" class="sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-4 lg:gap-1 grid w-full grid-cols-1 gap-6 mt-5">
               <ProductCard v-for="product in filteredProducts" :key="`${product.id}-${product.name}`" :product="product" />
             </section>
             <section v-else class="px-3">
               <BaseNodata errorMessage="Vi fant dessverre ingen ting..." />
-            </section>
-          </div>
-          <div v-else>
-            <section class="animate-pulse sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-4 lg:gap-1 grid w-full grid-cols-1 gap-6 px-3 mt-5">
-              <div v-for="i in 12" :key="i" style="height: 408px" class="w-full bg-gray-400 rounded" />
             </section>
           </div>
         </div>
@@ -385,11 +385,10 @@ export default defineComponent({
       }
     }
 
-    const { fetch } = useFetch(async () => {
+    const { fetch, fetchState } = useFetch(async () => {
       category.value = await $axios.$get(`categories/${currentCategory.value}/`)
       fetchedProducts.value = await $axios.$get(`categories/${currentCategory.value}/products/`)
 
-      loaded.value = true
       selectFilterFromQuery()
     })
 
@@ -403,7 +402,7 @@ export default defineComponent({
 
     return {
       search,
-      loaded,
+      fetchState,
       breadcrumbs,
       category,
       filters,
