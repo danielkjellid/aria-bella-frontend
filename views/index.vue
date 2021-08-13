@@ -49,7 +49,10 @@
         </p>
       </section>
       <!-- categories -->
-      <section v-if="loaded" class="sm:grid-cols-2 grid grid-cols-1 gap-0">
+      <section v-if="fetchState.pending" class="animate-pulse grid grid-cols-1 gap-0">
+        <div v-for="i in 5" :key="i" class="image-full-container bg-gray-400" />
+      </section>
+      <section v-else class="sm:grid-cols-2 grid grid-cols-1 gap-0">
         <article
           v-for="category in categories"
           :key="category.id"
@@ -90,15 +93,12 @@
           </div>
         </article>
       </section>
-      <section v-else class="animate-pulse grid grid-cols-1 gap-0">
-        <div v-for="i in 5" :key="i" class="image-full-container bg-gray-400" />
-      </section>
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, useStore } from '@nuxtjs/composition-api'
+import { computed, defineComponent, useStore, useFetch, ref, useContext } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'Home',
@@ -110,18 +110,19 @@ export default defineComponent({
   },
   setup() {
 
-    const store = useStore()
+    const { $axios } = useContext()
 
-    const categories = computed(() => store.getters['inventory/getCategories'])
-    const loaded = computed(() => {
-      if (categories.value.length > 0) return true
+    const categories = ref({})
 
-      return false
+    const { fetch, fetchState } = useFetch(async () => {
+      categories.value = await $axios.$get('categories/')
     })
+
+    fetch()
 
     return {
       categories,
-      loaded
+      fetchState
     }
   }
 })
