@@ -16,9 +16,6 @@
       <!-- color of navbar content is rended according to route meta -->
       <!-- this is because we want to render a transparent bar and white text over pages where there is an image on top -->
       <div class="relative z-10" :class="!renderNavbarTransparent ? 'bg-white shadow' : ( flyoutMenuActive ? 'bg-white shadow' : 'navbar-blur')">
-        <transition name="home">
-          <p v-show="flyoutMenuActive" class="z-50 text-red-900">Test</p>
-        </transition>
         <div style="max-width: 1600px;" class="sm:py-4 sm:px-8 px-5 py-5 mx-auto">
           <div class="flex items-center justify-between">
             <div class="flex items-center">
