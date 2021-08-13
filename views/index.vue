@@ -98,7 +98,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, useStore, useFetch, ref, useContext } from '@nuxtjs/composition-api'
+import { defineComponent, useFetch, ref, useContext } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'Home',

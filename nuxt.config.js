@@ -25,13 +25,6 @@ export default {
     middleware: [
       'header-color'
     ],
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'NotFound',
-        path: '*',
-        component: resolve(__dirname, 'views/404.vue')
-      })
-    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
