@@ -6,16 +6,16 @@
         <div class="table-cell align-middle">
           <!-- dummy images for the time being -->
           <img
-            src="https://flishuset.s3.amazonaws.com/CACHE/images/media/categories/belysning/12dd09e9045b7d0b9a704ea9930122bb.jpg"
+            src="https://flishuset.s3.amazonaws.com/media/front/bella/041de3343063683abb398e8943a85d99.jpg"
             alt=""
             class="absolute bottom-0 left-0 right-0 object-cover w-full h-full"
-            srcset="https://flishuset.s3.amazonaws.com/CACHE/images/media/products/Ubik/images/Keope_ubik_anthracite_bancone_dolmix/6cbcef26e625c9cc87f8d9dbb48d3708.jpeg 512w,
-                    https://flishuset.s3.amazonaws.com/CACHE/images/media/products/Ubik/images/Keope_ubik_anthracite_bancone_dolmix/5e9a194ebc45d73595958098d5cc7827.jpeg 1024w,
-                    https://flishuset.s3.amazonaws.com/CACHE/images/media/products/Ubik/images/Keope_ubik_anthracite_bancone_dolmix/4b89761a4b1d38ab7df91f27d68327ac.jpeg 1024w,
-                    https://flishuset.s3.amazonaws.com/CACHE/images/media/products/Ubik/images/Keope_ubik_anthracite_bancone_dolmix/35721221ccf18724fe14968ed3f8d46a.jpeg 1536w,
-                    https://flishuset.s3.amazonaws.com/CACHE/images/media/products/Ubik/images/Keope_ubik_anthracite_bancone_dolmix/e88babbc0cb75f6eb28a42e5d0ee83dc.jpeg 2048w,
-                    https://flishuset.s3.amazonaws.com/CACHE/images/media/products/Ubik/images/Keope_ubik_anthracite_bancone_dolmix/24b2dc146c981ed798cd88f9dd7d7987.jpeg 2560w,
-                    https://flishuset.s3.amazonaws.com/CACHE/images/media/products/Ubik/images/Keope_ubik_anthracite_bancone_dolmix/516bd3958993d206bfa1e412a670204b.jpeg 3072w"
+            srcset="https://flishuset.s3.amazonaws.com/media/front/bella/1d03a79727a259818a747fe0387e9e22.jpg 512w,
+                    https://flishuset.s3.amazonaws.com/media/front/bella/8090c13aceb4bfac595c8809d7d0a342.jpg 1024w,
+                    https://flishuset.s3.amazonaws.com/media/front/bella/035e9c26ac37bda6b81a733562e86731.jpg 1024w,
+                    https://flishuset.s3.amazonaws.com/media/front/bella/041de3343063683abb398e8943a85d99.jpg 1536w,
+                    https://flishuset.s3.amazonaws.com/media/front/bella/f2447d85152cb2ed0ec22c4fe13a4ef0.jpg 2048w,
+                    https://flishuset.s3.amazonaws.com/media/front/bella/d1e4279bf090cdd53c399b747483f295.jpg 2560w,
+                    https://flishuset.s3.amazonaws.com/media/front/bella/f9a89f4bf906eb873455f77e3516d13f.jpg 3072w"
           >
           <div class="absolute bottom-0 left-0 right-0 flex items-center justify-center h-full px-4">
             <div class="text-center">

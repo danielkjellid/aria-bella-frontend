@@ -1,19 +1,13 @@
 const { colors } = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  purge: {
-    enabled: false,
-    content: [
+  purge: [
     './components/**/*.{vue,js}',
     './layouts/**/*.vue',
     './views/**/*.vue',
     './plugins/**/*.{js,ts}',
     './nuxt.config.{js,ts}',
-    ],
-    options: {
-      safelist: ['transform', 'duration-500', 'ease-in-out', 'opacity-0', 'opacity-100']
-    }
-  },
+  ],
   theme: {
     extend: {
       colors: {
