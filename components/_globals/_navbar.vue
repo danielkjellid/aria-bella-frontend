@@ -116,16 +116,13 @@
         </div>
       </div>
       <!-- flyoutmenu component -->
-        <transition name="home">
-          <div v-show="flyoutMenuActive">
-            <!-- <FlyoutMenu key="flyout-menu" @close-menu="flyoutMenuActive = false" :menuItems="menuItems"></FlyoutMenu> -->
-            <p class="text-red-900">Test</p>
-          </div>
-        </transition>
+      <TransformFadeIn>
+        <FlyoutMenu v-show="flyoutMenuActive" key="flyout-menu" @close-menu="flyoutMenuActive = false" :menuItems="menuItems" />
+      </TransformFadeIn>
 
       <!-- mobile menu component -->
       <TransformSlideFromRight>
-        <MobileMenu v-if="mobileMenuActive" key="mobile-menu" @close-menu="mobileMenuActive = false" :menuItems="menuItems" />
+        <MobileMenu v-show="mobileMenuActive" key="mobile-menu" @close-menu="mobileMenuActive = false" :menuItems="menuItems" />
       </TransformSlideFromRight>
     </header>
   </div>
@@ -323,7 +320,4 @@ export default defineComponent({
  -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
 }
-
-.home-enter-active, .home-leave-active { transition: opacity .5s; }
-.home-enter, .home-leave-active { opacity: 0; }
 </style>
