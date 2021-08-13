@@ -28,26 +28,29 @@
           <div class="info-box bg-white rounded-md">
             <div class="px-5 py-5">
               <div>
-                <div v-if="loaded">
-                  <h1 class="text-xl font-semibold text-gray-900">{{ product.name }}</h1>
-                  <p class="mt-5 text-sm text-gray-700">{{ product.short_description }}</p>
-                </div>
-                <div v-else class="animate-pulse space-y-2">
+                <div v-if="fetchState.pending" class="animate-pulse space-y-2">
                   <div class="w-1/3 h-8 bg-gray-400 rounded" />
                   <div class="h-4 bg-gray-400 rounded" />
                   <div class="h-4 bg-gray-400 rounded" />
                   <div class="w-5/6 h-4 bg-gray-400 rounded" />
                 </div>
+                <div v-else>
+                  <h1 class="text-xl font-semibold text-gray-900">{{ product.name }}</h1>
+                  <p class="mt-5 text-sm text-gray-700">{{ product.short_description }}</p>
+                </div>
               </div>
-              <div v-if="loaded" class="mt-5">
-                <h2 v-if="product.site_state.display_price" class="text-lg font-semibold text-gray-900">kr {{ product.site_state.gross_price | formatPrice }} <span class="text-gray-600">per {{ product.unit }}</span></h2>
-              </div>
-              <div v-else class="animate-pulse mt-5">
+              <div v-if="fetchState.pending" class="animate-pulse mt-5">
                 <div class="w-2/3 h-8 bg-gray-400 rounded" />
+              </div>
+              <div v-else class="mt-5">
+                <h2 v-if="product.site_state.display_price" class="text-lg font-semibold text-gray-900">kr {{ product.site_state.gross_price | formatPrice }} <span class="text-gray-600">per {{ product.unit }}</span></h2>
               </div>
               <div v-if="product.variants" class="mt-5">
                 <h2 class="text-sm font-semibold text-gray-900">Varianter</h2>
-                <div v-if="loaded" class="grid grid-cols-8 gap-3 mt-3">
+                <div v-if="fetchState.pending" class="animate-pulse flex items-center mt-3 space-x-3">
+                  <div v-for="i in 5" :key="i" class="w-8 h-8 bg-gray-400 rounded-full" />
+                </div>
+                <div v-else class="grid grid-cols-8 gap-3 mt-3">
                   <button v-for="variant in product.variants" :key="variant.id" @click="selectVariant(variant.id)">
                     <div class="relative">
                       <img
@@ -61,13 +64,13 @@
                     </div>
                   </button>
                 </div>
-                <div v-else class="animate-pulse flex items-center mt-3 space-x-3">
-                  <div v-for="i in 5" :key="i" class="w-8 h-8 bg-gray-400 rounded-full" />
-                </div>
               </div>
               <div v-if="product.sizes" class="mt-5">
                 <h2 class="text-sm font-semibold text-gray-900">Størrelser</h2>
-                <div v-if="loaded" class="gap-y-3 grid grid-cols-3 gap-6 mt-3">
+                <div v-if="fetchState.pending" class="animate-pulse gap-y-3 grid grid-cols-3 gap-6 mt-3">
+                  <div v-for="i in 5" :key="i" class="h-4 bg-gray-400 rounded" />
+                </div>
+                <div v-else class="gap-y-3 grid grid-cols-3 gap-6 mt-3">
                   <BaseButton
                     v-for="size in product.sizes"
                     :key="size.id"
@@ -80,9 +83,6 @@
                     {{ size.name }}
                   </BaseButton>
                   <BaseButton v-if="product.available_in_special_sizes" @click="selectSize('Spesialstørrelse')" plain class="hover:underline text-sm">Spesialstørrelser*</BaseButton>
-                </div>
-                <div v-else class="animate-pulse gap-y-3 grid grid-cols-3 gap-6 mt-3">
-                  <div v-for="i in 5" :key="i" class="h-4 bg-gray-400 rounded" />
                 </div>
               </div>
               <!-- <div class="mt-6" v-if="!product.can_be_purchased_online">
@@ -121,21 +121,21 @@
             :title="product.name"
             :price="{gross_price: product.site_state.gross_price, unit: product.unit}"
             :display_price="product.site_state.display_price"
-            :loaded="loaded"
+            :loaded="!fetchState.pending"
             :text="product.short_description"
           />
         </div>
         <div class="mt-12">
           <ProductDescriptionBlock
             title="Beskrivelse"
-            :loaded="loaded"
+            :loaded="!fetchState.pending"
             :text="product.description"
           />
         </div>
         <div v-if="product.variants.length > 0" class="mt-12">
           <ProductVariantBlock
             title="Varianter"
-            :loaded="loaded"
+            :loaded="!fetchState.pending"
             :variants="product.variants"
             :order="order"
             @on-select="displayVariantModal"
@@ -146,7 +146,11 @@
             <h2 class="text-lg font-semibold text-gray-900">Størrelser <span class="text-gray-600">oppgitt i cm</span></h2>
             <div class="mt-6">
               <!-- buttons to select sizes -->
-              <div v-if="loaded" class="gap-y-6 sm:grid-cols-4 sm:gap-8 grid grid-cols-3 gap-10">
+              <!-- sceleton loaded placeholder for sizes -->
+              <div v-if="fetchState.pending" class="gap-y-6 sm:grid-cols-4 sm:gap-8 grid grid-cols-3 gap-10">
+                <div v-for="i in 4" :key="i" class="w-full h-4 bg-gray-400 rounded"></div>
+              </div>
+              <div v-else class="gap-y-6 sm:grid-cols-4 sm:gap-8 grid grid-cols-3 gap-10">
                 <BaseButton
                   v-for="size in product.sizes"
                   :key="size.id"
@@ -161,10 +165,6 @@
                 <BaseButton v-if="product.available_in_special_sizes" @click="selectSize('Spesialstørrelse')" plain class="hover:underline text-sm">Spesialstørrelser*</BaseButton>
               </div>
 
-              <!-- sceleton loaded placeholder for sizes -->
-              <div v-else class="gap-y-6 sm:grid-cols-4 sm:gap-8 grid grid-cols-3 gap-10">
-                <div v-for="i in 4" :key="i" class="w-full h-4 bg-gray-400 rounded"></div>
-              </div>
 
               <!-- text to tell users to contact for more info regarding sizes -->
               <p v-if="product.available_in_special_sizes" class="mt-6 text-xs text-gray-700">* Produktet finnes i størrelser utover det som er standard, eller kan tilpasses dine behov. Ta kontakt med oss for mer informasjon!</p>
@@ -174,7 +174,16 @@
         <div class="mt-12">
           <article class="mt-12">
             <h2 class="text-lg font-semibold text-gray-900">Spesifikasjoner</h2>
-            <table v-if="loaded" class="lg:w-3/4 w-64 mt-6">
+            <!-- sceleton loaded for specifcations -->
+            <table v-if="fetchState.pending" class="lg:w-3/4 animate-pulse w-64 mt-6">
+              <tbody>
+                <tr v-for="i in 6" :key="i">
+                  <td class="text-sm text-gray-700"><div class="w-11/12 h-4 bg-gray-400 rounded"></div></td>
+                  <td class="text-sm text-gray-700"><div class="w-11/12 h-4 bg-gray-400 rounded"></div></td>
+                </tr>
+              </tbody>
+            </table>
+            <table v-else class="lg:w-3/4 w-64 mt-6">
               <tbody>
                 <tr class="mt-6 sr-only">
                   <th>Spesifikasjon</th>
@@ -194,20 +203,10 @@
                 </tr>
               </tbody>
             </table>
-
-            <!-- sceleton loaded for specifcations -->
-            <table v-else class="lg:w-3/4 animate-pulse w-64 mt-6">
-              <tbody>
-                <tr v-for="i in 6" :key="i">
-                  <td class="text-sm text-gray-700"><div class="w-11/12 h-4 bg-gray-400 rounded"></div></td>
-                  <td class="text-sm text-gray-700"><div class="w-11/12 h-4 bg-gray-400 rounded"></div></td>
-                </tr>
-              </tbody>
-            </table>
           </article>
         </div>
         <div class="mt-12">
-          <ProductFilesBlock :loaded="loaded" :files="product.files" />
+          <ProductFilesBlock :loaded="!fetchState.pending" :files="product.files" />
         </div>
       </section>
     </div>
@@ -239,7 +238,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, useContext, useRoute, useMeta, ref, toRefs, reactive } from '@nuxtjs/composition-api'
+import { computed, defineComponent, useContext, useRoute, useMeta, ref, toRefs, reactive, useFetch } from '@nuxtjs/composition-api'
 import ImageCarousel from '~/components/image-carousel.vue'
 import ProductSpecRow from '~/components/product/spec-row.vue'
 import ProductDescriptionBlock from '~/components/product/description-block.vue'
@@ -327,7 +326,6 @@ export default defineComponent({
     }
 
     const slug = route.value.params.productSlug
-    let loaded = ref<boolean>(false)
 
     /************
     ** Product **
@@ -353,25 +351,6 @@ export default defineComponent({
       origin_country: '',
       site_state: {} as ProductSiteState
     })
-
-    // get products attached to category
-    const fetchProduct = async (): Promise<void> => {
-      await $axios.$get(`products/${slug}/`)
-        .then(data => {
-          product.value = data
-
-          title.value = data.name
-          meta.value = [
-            {
-              name: 'description',
-              content: `Detaljside av produktet ${data.name}`
-            }
-          ]
-
-          // when products are loaded, set loaded to true
-          loaded.value = true
-        })
-    }
 
     /**********
     ** Order **
@@ -415,12 +394,24 @@ export default defineComponent({
       }
     }
 
-    fetchProduct()
+    const { fetch, fetchState } = useFetch(async () => {
+      product.value = await $axios.$get(`products/${slug}/`)
+
+      title.value = product.value.name
+      meta.value = [
+        {
+          name: 'description',
+          content: `Detaljside av produktet ${product.value.name}`
+        }
+      ]
+    })
+
+    fetch()
 
     return {
       product,
       order,
-      loaded,
+      fetchState,
       increaseQuantity,
       decreaseQuantity,
       selectVariant,
