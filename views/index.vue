@@ -84,7 +84,7 @@
           </div>
           <div v-if="category.apply_filter" class="opacity-20 absolute inset-0 bg-black" />
           <div class="absolute bottom-0 left-0 right-0 flex items-center justify-center h-full">
-            <h2 class="text-xl text-white">{{ category.name }}</h2>
+            <h1 class="text-xl text-white">{{ category.name }}</h1>
           </div>
           <div class="absolute bottom-0 left-0 right-0 mb-8 text-center">
             <BaseButton outlined :to="`/category/${category.slug}/`">

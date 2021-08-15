@@ -106,6 +106,19 @@
               </form>
             </div>
           </section>
+          <section class="lg:px-3 mt-5">
+            <div class="auto-cols-max relative grid grid-flow-col gap-2 overflow-x-auto">
+              <div v-for="c in tempCat" :key="c" class="relative">
+                <div class="w-72 table-cell h-48 align-middle rounded-md">
+                  <img :src="c.img" class="absolute bottom-0 left-0 right-0 object-cover w-full h-full rounded-md" />
+                  <div class="hover:bg-opacity-50 absolute inset-0 flex items-center justify-center h-full px-4 bg-black bg-opacity-25 rounded-md">
+                    <h2 class="text-2xl font-semibold text-white">{{c.title}}</h2>
+                  </div>
+                </div>
+              </div>
+              <!-- <div v-for="i in 8" :key="i" class="w-72 h-48 bg-gray-400 rounded-md"></div> -->
+            </div>
+          </section>
           <div v-if="fetchState.pending">
             <section class="animate-pulse sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-4 lg:gap-1 grid w-full grid-cols-1 gap-6 px-3 mt-5">
               <div v-for="i in 12" :key="i" style="height: 408px" class="w-full bg-gray-400 rounded" />
@@ -127,6 +140,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, useContext, useRoute, useMeta, ref, watch, useFetch } from '@nuxtjs/composition-api'
+import Section from '~/components/admin/section.vue'
 import ProductCard from '~/components/product/card.vue'
 import ProductFilterBlock from '~/components/product/filter-block.vue'
 import TransformFadeIn from '~/components/transform/fade-in.vue'
@@ -140,9 +154,46 @@ export default defineComponent({
   components: {
     ProductCard,
     ProductFilterBlock,
-    TransformFadeIn
+    TransformFadeIn,
+    Section
   },
   setup() {
+
+    const tempCat = [
+      {
+        title: 'Vasker',
+        img: 'https://www.antoniolupi.it/resources/halfhd/5e6f46c766d10a004db43983/uploads/2020/12/16/1608124438546_lavabi.jpg'
+      },
+      {
+        title: 'Badekar',
+        img: 'https://www.antoniolupi.it/resources/halfhd/5e6f46c766d10a004db43986/uploads/2020/12/16/1608124194478_vasche.jpg'
+      },
+      {
+        title: 'Kraner',
+        img: 'https://www.antoniolupi.it/resources/halfhd/5e6f46c766d10a004db43992/uploads/2020/12/16/1608124694550_rubinetti.jpg'
+      },
+      {
+        title: 'Dusjhoder',
+        img: 'https://www.antoniolupi.it/resources/halfhd/5e6f46c766d10a004db4398c/uploads/2020/12/16/1608124647266_soffioni.jpg'
+      },
+      {
+        title: 'Speil og lys',
+        img: 'https://www.antoniolupi.it/resources/halfhd/5e6f46c766d10a004db4399e/uploads/2020/12/17/1608204991931_al_showroom_2020_10_01_pedana_06_25_gen.jpg'
+      },
+      {
+        title: 'Peis',
+        img: 'https://www.antoniolupi.it/resources/halfhd/5e6f46c766d10a004db43989/uploads/2020/12/16/1608124612788_camini.jpg'
+      },
+      {
+        title: 'Tepper',
+        img: 'https://www.antoniolupi.it/resources/halfhd/602e3e2236de77d912e445fd/uploads/2021/2/18/1613643377829_09_al_showroom_2020_10_22_pietra_fuoco_05_gen.jpg'
+      },
+      {
+        title: 'Topper',
+        img: 'https://www.antoniolupi.it/resources/halfhd/5e6f46c766d10a004db4398f/uploads/2020/12/16/1608124670264_top.jpg'
+      },
+
+    ]
 
     /**************
     ** Utilities **
@@ -413,7 +464,8 @@ export default defineComponent({
       filterMobileMenuActive,
       toggleFilter,
       searchEndpoint,
-      countFiltersActive
+      countFiltersActive,
+      tempCat
     }
   }
 })

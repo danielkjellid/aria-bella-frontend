@@ -56,8 +56,9 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/axios', // https://go.nuxtjs.dev/axios
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -68,5 +69,22 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  // Robots: https://github.com/nuxt-community/robots-module#readme
+  robots: [
+    {
+      UserAgent: 'Googlebot',
+      Disallow: () => '/admin'
+    },
+    {
+      UserAgent: 'Bingbot',
+      Disallow: () => '/admin'
+    }
+  ],
+
+  // Sitemap: https://github.com/nuxt-community/sitemap-module#readme
+  // sitemap: [
+
+  // ]
 }

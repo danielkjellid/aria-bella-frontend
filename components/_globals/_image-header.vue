@@ -18,7 +18,7 @@
         <div class="absolute bottom-0 left-0 right-0 flex items-center justify-center h-full px-4">
           <div class="text-center">
             <slot>
-              <h2 class="text-2xl font-semibold text-white">{{ object.name }}</h2>
+              <h1 class="text-2xl font-semibold text-white">{{ object.name }}</h1>
             </slot>
           </div>
         </div>
