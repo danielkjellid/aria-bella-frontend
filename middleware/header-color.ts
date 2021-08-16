@@ -6,9 +6,9 @@ export default (context: Context) => {
     return meta.navbarTransparent
   })
 
-  if (renderTransparent[0] === true) {
-    return context.store.dispatch('common/setRenderNavbarTransparent', true)
+  if (renderTransparent[0] === false) {
+    return context.store.dispatch('common/setRenderNavbarTransparent', false)
   }
 
-  return context.store.dispatch('common/setRenderNavbarTransparent', false)
+  return context.store.dispatch('common/setRenderNavbarTransparent', true)
 }

@@ -12,7 +12,7 @@
       :title="errorNotification"
       @close-notification="resetErrorNotification"
     />
-    <header :class="!renderNavbarTransparent ? 'relative' : 'absolute left-0 right-0'" v-click-outside="hideFlyoutMenu">
+    <header :class="!renderNavbarTransparent ? 'relative' : 'absolute left-0 right-0 z-40'" v-click-outside="hideFlyoutMenu">
       <!-- color of navbar content is rended according to route meta -->
       <!-- this is because we want to render a transparent bar and white text over pages where there is an image on top -->
       <div class="relative z-10" :class="!renderNavbarTransparent ? 'bg-white shadow' : ( flyoutMenuActive ? 'bg-white shadow' : 'navbar-blur')">
