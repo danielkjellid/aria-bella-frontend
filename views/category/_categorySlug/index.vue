@@ -106,7 +106,7 @@
               </form>
             </div>
           </section>
-          <section class="lg:px-3 mt-5">
+          <section class="lg:px-3 relative mt-5">
             <div class="auto-cols-max relative grid grid-flow-col gap-2 overflow-x-auto">
               <div v-for="c in tempCat" :key="c" class="relative">
                 <div class="w-72 table-cell h-48 align-middle rounded-md">
@@ -116,9 +116,20 @@
                   </div>
                 </div>
               </div>
-              <!-- <div v-for="i in 8" :key="i" class="w-72 h-48 bg-gray-400 rounded-md"></div> -->
+              <div class="absolute inset-0">
+                <div class="absolute top-0 bottom-0 right-0 flex items-center">
+                  <BaseIcon class="test" name="chevron-right" solid fill="text-brand-600" height="h-8" width="w-8" />
+                </div>
+              </div>
             </div>
           </section>
+          <section class="lg:px-3 relative mt-5">
+            <Test />
+          </section>
+          <!-- <section class="lg:px-3 relative mt-5">
+            <ProductCategoriesBlock :categories="tempCat" />
+          </section> -->
+
           <div v-if="fetchState.pending">
             <section class="animate-pulse sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-4 lg:gap-1 grid w-full grid-cols-1 gap-6 px-3 mt-5">
               <div v-for="i in 12" :key="i" style="height: 408px" class="w-full bg-gray-400 rounded" />
@@ -142,8 +153,10 @@
 import { computed, defineComponent, useContext, useRoute, useMeta, ref, watch, useFetch } from '@nuxtjs/composition-api'
 import Section from '~/components/admin/section.vue'
 import ProductCard from '~/components/product/card.vue'
+import ProductCategoriesBlock from '~/components/product/categories-block.vue'
 import ProductFilterBlock from '~/components/product/filter-block.vue'
 import TransformFadeIn from '~/components/transform/fade-in.vue'
+import Test from '~/components/test.vue'
 
 export default defineComponent({
   name: 'Category',
@@ -154,8 +167,10 @@ export default defineComponent({
   components: {
     ProductCard,
     ProductFilterBlock,
+    ProductCategoriesBlock,
     TransformFadeIn,
-    Section
+    Section,
+    Test
   },
   setup() {
 
@@ -490,6 +505,21 @@ export default defineComponent({
     }
     to {
       margin-right: 0%;
+    }
+  }
+
+  .test {
+    animation: nudge 2s infinite;
+  }
+
+  @keyframes nudge {
+    0%, 100% {
+      transform: translateX(-25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: translateX(0%);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
   }
 </style>
