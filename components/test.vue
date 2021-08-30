@@ -30,15 +30,15 @@
     </section> -->
 
     <div class="overflow-hidden">
-      <transition-group class="auto-cols-max slider grid grid-flow-col gap-2" tag="div" name="list">
+      <transition-group class="slider" tag="div" name="list">
         <div
-          class="auto-cols-max relative grid grid-flow-col gap-2"
+          class="slide-container"
           v-for="(container, slideContainerIndex) in slideContainer"
           :key="container"
           :class="[slideContainerIndex % 3 === 1 ? 'middle' : '']"
         >
           <div
-            class="w-72 h-48 border border-indigo-600"
+            class="w-72 slide h-48 border border-indigo-600"
             v-for="(content, contentIndex) in contentContainer[container]"
             :key="contentIndex"
           >

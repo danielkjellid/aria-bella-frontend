@@ -123,9 +123,9 @@
               </div>
             </div>
           </section>
-          <section class="lg:px-3 relative mt-5">
+          <!-- <section class="lg:px-3 relative mt-5">
             <Test />
-          </section>
+          </section> -->
           <!-- <section class="lg:px-3 relative mt-5">
             <ProductCategoriesBlock :categories="tempCat" />
           </section> -->
