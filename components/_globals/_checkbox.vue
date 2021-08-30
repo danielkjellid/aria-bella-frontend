@@ -5,7 +5,7 @@
         @change="$emit('input', $event.target.checked)"
         type="checkbox"
         :checked="checked"
-        class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 focus:border-transparent w-5 h-5 text-gray-800 rounded"
+        class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-800 focus:border-transparent text-brand-800 w-5 h-5 rounded"
       >
       <div v-if="!hiddenLabel" class="ml-3 -mt-px text-sm">
         <span class="block font-semibold text-gray-800">{{ label }}</span>

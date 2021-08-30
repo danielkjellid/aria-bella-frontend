@@ -30,8 +30,8 @@
             />
           </div>
         </div>
-        <div class="sm:flex sm:items-end sm:justify-between sm:w-full mt-5">
-          <div class="sm:w-1/4">
+        <div class="flex items-end justify-between w-full mt-5">
+          <div class="w-1/4">
             <BaseSelect
               id="id_birth_day"
               v-model="birthDay"
@@ -50,7 +50,7 @@
               </option>
             </BaseSelect>
           </div>
-          <div class="sm:w-1/2 sm:ml-5 sm:mt-0 mt-5">
+          <div class="sm:mt-0 w-1/2 mt-5 ml-5">
             <BaseSelect
               id="id_birth_month"
               v-model="birthMonth"
@@ -69,7 +69,7 @@
               </option>
             </BaseSelect>
           </div>
-          <div class="sm:w-1/4 sm:ml-5 sm:mt-0 mt-5">
+          <div class="sm:mt-0 w-1/4 mt-5 ml-5">
             <BaseSelect
               id="id_birth_year"
               v-model="birthYear"
