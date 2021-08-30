@@ -63,11 +63,11 @@
       <TransformFadeIn>
         <div v-show="filterMenuActive" class="lg:block hidden mt-8">
           <div class="grid grid-cols-5 gap-3">
-            <ProductFilterBlock :loaded="!fetchState.pending" title="Kategorier" :items="availableFilters.categories" :activeFilters="filters" @toggle-filter="toggleFilter" />
-            <ProductFilterBlock :loaded="!fetchState.pending" title="Stil" :items="availableFilters.styles" :activeFilters="filters" @toggle-filter="toggleFilter" />
-            <ProductFilterBlock :loaded="!fetchState.pending" title="Bruksområde" :items="availableFilters.applications" :activeFilters="filters" @toggle-filter="toggleFilter" />
-            <ProductFilterBlock :loaded="!fetchState.pending" title="Materiale" :items="availableFilters.materials" :activeFilters="filters" @toggle-filter="toggleFilter" />
-            <ProductFilterBlock :loaded="!fetchState.pending" title="Farger" :items="availableFilters.colors" :activeFilters="filters" @toggle-filter="toggleFilter">
+            <ProductFilterBlock :loading="fetchState.pending" title="Kategorier" :items="availableFilters.categories" :activeFilters="filters" @toggle-filter="toggleFilter" />
+            <ProductFilterBlock :loading="fetchState.pending" title="Stil" :items="availableFilters.styles" :activeFilters="filters" @toggle-filter="toggleFilter" />
+            <ProductFilterBlock :loading="fetchState.pending" title="Bruksområde" :items="availableFilters.applications" :activeFilters="filters" @toggle-filter="toggleFilter" />
+            <ProductFilterBlock :loading="fetchState.pending" title="Materiale" :items="availableFilters.materials" :activeFilters="filters" @toggle-filter="toggleFilter" />
+            <ProductFilterBlock :loading="fetchState.pending" title="Farger" :items="availableFilters.colors" :activeFilters="filters" @toggle-filter="toggleFilter">
               <template #box="{ item }">
                 <div :style="`background-color: ${item.color_hex}`" class="w-5 h-5 mr-3 border border-gray-200 rounded-full"></div>
               </template>
@@ -106,7 +106,7 @@
               </form>
             </div>
           </section>
-          <section class="lg:px-3 relative mt-5">
+          <!-- <section class="lg:px-3 relative mt-5">
             <div class="auto-cols-max relative grid grid-flow-col gap-2 overflow-x-auto">
               <div v-for="c in tempCat" :key="c" class="relative">
                 <div class="w-72 table-cell h-48 align-middle rounded-md">
@@ -122,7 +122,7 @@
                 </div>
               </div>
             </div>
-          </section>
+          </section> -->
           <!-- <section class="lg:px-3 relative mt-5">
             <Test />
           </section> -->

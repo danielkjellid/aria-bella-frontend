@@ -238,6 +238,7 @@ export default defineComponent({
       store.dispatch('auth/logOut')
       userMenuActive.value = false
       store.dispatch('common/setNotification', 'Logget ut suksessfullt!')
+      router.push('/')
     }
 
     /******************

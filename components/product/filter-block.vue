@@ -3,7 +3,10 @@
     <h3 class="px-3 text-sm font-semibold leading-4 tracking-wide text-gray-400 uppercase">
       {{ title }}
     </h3>
-    <div v-if="loaded" class="mt-2">
+    <div v-if="loading" class="animate-pulse px-3 mt-2 space-y-2">
+      <div v-for="i in 4" :key="i" class="w-full h-10 bg-gray-400 rounded" />
+    </div>
+    <div v-else class="mt-2">
       <BaseButton
         v-for="(item, index) in items"
         :key="`${item}-${index}`"
@@ -27,9 +30,6 @@
         </div>
       </BaseButton>
     </div>
-    <div v-else class="animate-pulse px-3 mt-2 space-y-2">
-      <div v-for="i in 4" :key="i" class="w-full h-10 bg-gray-400 rounded" />
-    </div>
   </div>
 </template>
 
@@ -39,7 +39,7 @@ import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   name: 'ProductFilterBlock',
   props: {
-    loaded: {
+    loading: {
       type: Boolean,
       default: false,
     },
