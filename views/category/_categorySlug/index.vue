@@ -4,7 +4,7 @@
     <!-- site product content -->
     <div class="container px-5 py-8 mx-auto">
       <!-- filter menu on smaller devices -->
-      <div v-show="filterMobileMenuActive" class="fixed inset-0 z-20 overflow-hidden">
+      <div v-show="filterMobileMenuActive" class="fixed inset-0 z-50 overflow-hidden">
         <div class="absolute inset-0 overflow-hidden">
           <div @click="filterMobileMenuActive = false" class="absolute inset-0 transition-opacity bg-black bg-opacity-50"></div>
             <transition
@@ -15,7 +15,7 @@
               leave-active-class="sm:duration-700 transition duration-500 ease-in-out transform"
               leave-to-class="-translate-x-full"
             >
-              <section v-show="filterMobileMenuActive" class="absolute inset-y-0 left-0 z-30 flex max-w-full mr-10">
+              <section v-show="filterMobileMenuActive" class="absolute inset-y-0 left-0 z-50 flex max-w-full mr-10">
                 <div class="w-screen max-w-xs">
                   <div class="flex flex-col h-full py-6 space-y-6 overflow-y-scroll bg-white shadow-xl">
                     <header class="sm:px-6 px-4">
