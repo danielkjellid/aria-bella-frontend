@@ -75,8 +75,9 @@ import { defineComponent, reactive } from "@nuxtjs/composition-api";
 
 export default defineComponent({
   name: "Contact",
-  meta: {},
-  head: {},
+  head: {
+    title: 'Kontakt oss'
+  },
   setup() {
     interface ContactObj {
       name: string;

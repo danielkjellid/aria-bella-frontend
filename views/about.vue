@@ -76,8 +76,9 @@ import { defineComponent } from "@nuxtjs/composition-api";
 
 export default defineComponent({
   name: "About",
-  meta: {},
-  head: {},
+  head: {
+    title: 'Om oss'
+  },
   setup() {
     const image = {
       name: "Om oss",
