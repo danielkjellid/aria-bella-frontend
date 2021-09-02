@@ -42,11 +42,11 @@
                           </BaseButton>
                         </div>
                       </div>
-                      <ProductFilterBlock :loaded="!fetchState.pending" title="Kategorier" :items="availableFilters.categories" :activeFilters="filters" @toggle-filter="toggleFilter" />
-                      <ProductFilterBlock :loaded="!fetchState.pending" title="Stil" :items="availableFilters.styles" :activeFilters="filters" @toggle-filter="toggleFilter" />
-                      <ProductFilterBlock :loaded="!fetchState.pending" title="Bruksområde" :items="availableFilters.applications" :activeFilters="filters" @toggle-filter="toggleFilter" />
-                      <ProductFilterBlock :loaded="!fetchState.pending" title="Materiale" :items="availableFilters.materials" :activeFilters="filters" @toggle-filter="toggleFilter" />
-                      <ProductFilterBlock :loaded="!fetchState.pending" title="Farger" :items="availableFilters.colors" :activeFilters="filters" @toggle-filter="toggleFilter">
+                      <ProductFilterBlock :loading="fetchState.pending" title="Kategorier" :items="availableFilters.categories" :activeFilters="filters" @toggle-filter="toggleFilter" />
+                      <ProductFilterBlock :loading="fetchState.pending" title="Stil" :items="availableFilters.styles" :activeFilters="filters" @toggle-filter="toggleFilter" />
+                      <ProductFilterBlock :loading="fetchState.pending" title="Bruksområde" :items="availableFilters.applications" :activeFilters="filters" @toggle-filter="toggleFilter" />
+                      <ProductFilterBlock :loading="fetchState.pending" title="Materiale" :items="availableFilters.materials" :activeFilters="filters" @toggle-filter="toggleFilter" />
+                      <ProductFilterBlock :loading="fetchState.pending" title="Farger" :items="availableFilters.colors" :activeFilters="filters" @toggle-filter="toggleFilter">
                         <template #box="{ item }">
                           <div :style="`background-color: ${item.color_hex}`" class="w-5 h-5 mr-3 border border-gray-200 rounded-full"></div>
                         </template>
