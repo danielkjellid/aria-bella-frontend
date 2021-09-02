@@ -51,6 +51,7 @@
                   </transition>
                 </BaseButton>
                 <nuxt-link to="/about/" :class="renderNavbarLinkClasses" :active-class="renderNavbarLinkActiveClasses" class="ml-4">Om oss</nuxt-link>
+                <nuxt-link to="/contact/" :class="renderNavbarLinkClasses" :active-class="renderNavbarLinkActiveClasses" class="ml-4">Kontakt oss</nuxt-link>
                 <!-- commented out as the links are not functional yet -->
                 <!-- <nuxt-link to="/kjokken" :class="renderNavbarLinkClasses" :active-class="renderNavbarLinkActiveClasses" class="ml-4">Inspirasjon</nuxt-link> -->
                 <!-- <nuxt-link to="/tegnetime" :class="renderNavbarLinkClasses" :active-class="renderNavbarLinkActiveClasses" class="ml-4">Tegnetime</nuxt-link> -->
