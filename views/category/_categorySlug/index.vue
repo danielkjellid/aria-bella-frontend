@@ -83,7 +83,7 @@
                 <BaseButton @click="filterMobileMenuActive = true" light class="lg:hidden flex items-center justify-center w-full mr-3">
                   <BaseIcon name="filter" class="mr-2" fill="text-brand-500" />
                   Filter
-                  <span v-if="filters.length > 0" class="flex items-center justify-center w-5 h-5 ml-2 text-xs text-gray-700 bg-gray-300 rounded-full">{{ countFiltersActive }}</span>
+                  <span v-if="filters.length > 0" class="text-brand-800 bg-brand-400 flex items-center justify-center w-5 h-5 ml-2 text-xs rounded-full">{{ countFiltersActive }}</span>
                 </BaseButton>
               </div>
               <form @submit.prevent="searchEndpoint()">
@@ -96,12 +96,13 @@
                     label="search"
                     hiddenLabel
                   />
-                  <BaseButton type="submit" class="ml-2">Søk i varer</BaseButton>
                   <BaseButton light @click="filterMenuActive = !filterMenuActive" class="lg:flex hidden ml-2">
                     <BaseIcon v-if="!filterMenuActive" name="filter" class="mr-2" fill="text-brand-500" />
                     <BaseIcon v-else name="x" outline class="mr-2" fill="text-brand-500" />
                     Filter
+                    <span v-if="filters.length > 0" class="text-brand-800 bg-brand-400 flex items-center justify-center w-5 h-5 ml-2 text-xs rounded-full">{{ countFiltersActive }}</span>
                   </BaseButton>
+                  <BaseButton type="submit" class="ml-2">Søk i varer</BaseButton>
                 </div>
               </form>
             </div>
