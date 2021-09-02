@@ -3,7 +3,7 @@
     <label
       :for="id"
       :class="{ 'sr-only': hiddenLabel, 'mb-1': label }"
-      class="block text-sm font-medium leading-5 text-gray-700"
+      class="block text-sm font-semibold leading-5 text-gray-700"
       >{{ label }}</label
     >
     <div class="relative rounded-md">
