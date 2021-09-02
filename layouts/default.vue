@@ -15,7 +15,7 @@
     </SiteMessage>
     <div>
       <BaseNavbar />
-      <Nuxt class="relative" />
+      <Nuxt class="relative min-h-screen" />
       <BaseFooter />
     </div>
     <div v-show="showMessage" class="sm:pb-5 fixed inset-x-0 bottom-0 pb-2">

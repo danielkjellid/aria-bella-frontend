@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-brand-50 relative">
+  <footer class="bg-brand-50 relative bottom-0 left-0 right-0">
     <div style="max-width: 1600px;" class="md:flex md:items-center md:justify-between lg:px-8 sm:px-8 px-5 py-12 mx-auto">
       <div class="md:order-2 flex justify-center space-x-6">
         <a href="mailto:bella@bella.no" class="hover:text-brand-600 text-brand-500">
