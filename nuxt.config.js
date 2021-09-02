@@ -51,6 +51,7 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/composition-api/module',
+    '@nuxtjs/google-analytics',
     '@nuxtjs/svg'
   ],
 
@@ -82,6 +83,11 @@ export default {
       Disallow: () => '/admin'
     }
   ],
+
+  // Google analytics: https://google-analytics.nuxtjs.org/
+  googleAnalytics: {
+    id: process.env.GOOGLE_ANALYTICS_ID,
+  }
 
   // Sitemap: https://github.com/nuxt-community/sitemap-module#readme
   // sitemap: [
