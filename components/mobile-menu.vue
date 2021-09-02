@@ -72,23 +72,23 @@
       </div>
       <!-- footer that displays usermenu -->
       <!-- if the user is not authenticated, they will be redirected to login upon click -->
-      <div v-if="userIsAuthenticated" @click="collapsedUserMenuActive = !collapsedUserMenuActive" class="absolute bottom-0 left-0 right-0 px-5 py-5 bg-white border-t border-gray-200">
+      <div v-if="user" @click="collapsedUserMenuActive = !collapsedUserMenuActive" class="absolute bottom-0 left-0 right-0 px-5 py-5 bg-white border-t border-gray-200">
         <BaseButton plain class="hover:text-gray-600 flex items-center justify-between w-full text-left text-gray-500">
           <div class="flex items-center">
-            <div class="flex items-center justify-center w-10 h-10 border border-gray-400 rounded-full">
-              <BaseIcon name="user" fill="text-gray-500" />
+            <div v-if="user && user != undefined" :style="`background-color: ${user.avatar_color}`" class="flex items-center justify-center w-10 h-10 rounded-full">
+              <span class="text-sm text-white">{{ user.initial }}</span>
             </div>
             <div class="ml-3">
-              <div class="text-base font-semibold leading-6 text-gray-800">Daniel Kjellid</div>
-              <div class="text-sm font-semibold leading-5 text-gray-600">daniel@example.com</div>
+              <div class="text-sm font-semibold leading-6 text-gray-800">{{ user.full_name }}</div>
+              <div class="text-sm leading-5 text-gray-600">{{ user.email }}</div>
             </div>
           </div>
           <BaseIcon name="chevron-down" solid />
         </BaseButton>
         <div v-show="collapsedUserMenuActive" class="mt-5">
-          <nuxt-link to="/" class="hover:text-gray-600 block mt-4 text-base leading-7 text-gray-900">Din konto</nuxt-link>
-          <nuxt-link to="/" class="hover:text-gray-600 block mt-4 text-base leading-7 text-gray-900">Innstillinger</nuxt-link>
-          <nuxt-link to="/" class="hover:text-gray-600 block mt-4 text-base leading-7 text-gray-900">Logg ut</nuxt-link>
+          <!-- <nuxt-link to="/" class="hover:text-gray-600 block mt-4 text-base leading-7 text-gray-900">Din konto</nuxt-link>
+          <nuxt-link to="/" class="hover:text-gray-600 block mt-4 text-base leading-7 text-gray-900">Innstillinger</nuxt-link> -->
+          <button @click="logOut" class="hover:text-gray-600 block mt-4 text-base leading-7 text-gray-900">Logg ut</button>
         </div>
       </div>
       <div v-else class="absolute bottom-0 left-0 right-0 px-5 py-5 bg-white border-t border-gray-200">
@@ -124,12 +124,19 @@ export default defineComponent({
       emit('close-menu')
     }
 
+    // get current user logged into application
+    const user = computed(() => store.getters['auth/getCurrentUser'])
+
     let collapsedUserMenuActive = ref<boolean>(false)
 
-    // property that holds if the user is authenticated
-    const userIsAuthenticated = computed(() => {
-      store.getters['auth/getIsAuthenticated']
-    })
+    const logOut = (): void => {
+      store.dispatch('common/resetNotification')
+      store.dispatch('common/resetErrorNotification')
+      collapsedUserMenuActive.value = false
+      store.dispatch('auth/logOut')
+      router.go(0) // refresh current page
+      store.dispatch('common/setNotification', 'Logget ut suksessfullt!')
+    }
 
     // render classes of links
     const renderNavbarLinkClasses = computed(() => {
@@ -155,7 +162,8 @@ export default defineComponent({
     return {
       catalogMenuActive,
       collapsedUserMenuActive,
-      userIsAuthenticated,
+      user,
+      logOut,
       renderNavbarLinkClasses,
       renderNavbarLinkActiveClasses,
       renderChevronPath,
