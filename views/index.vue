@@ -62,29 +62,28 @@
           <div class="table-cell align-middle">
             <img
               v-if="category.width === 'full'"
-              :src="category.image_1536x660"
+              :src="category.images.image_1536x860"
               :alt="`Placeholder image for the ${category.name} category.`"
               class="absolute bottom-0 left-0 right-0 object-cover w-full h-full"
-              :srcset="`${category.image_512x512} 512w,
-                        ${category.image_1024x1024} 1024w,
-                        ${category.image_1024x480} 1024w,
-                        ${category.image_1536x660} 1536w,
-                        ${category.image_2048x800} 2048w,
-                        ${category.image_2560x940} 2560w,
-                        ${category.image_3072x940} 3072w`"
+              :srcset="`${category.images.image_512x512} 512w,
+                        ${category.images.image_640x275} 640w,
+                        ${category.images.image_1024x1024} 1024w,
+                        ${category.images.image_1024x575} 1024w,
+                        ${category.images.image_1536x860} 1536w,
+                        ${category.images.image_2048x1150} 2048w`"
             >
             <img
               v-else
-              :src="category.image_1024x1024"
+              :src="category.images.image_1024x1024"
               :alt="`Placeholder image of the ${category.name} category.`"
               class="object-cover"
-              :srcset="`${category.image_512x512} 512w,
-                        ${category.image_1024x1024} 1024w`"
+              :srcset="`${category.images.image_512x512} 512w,
+                        ${category.images.image_1024x1024} 1024w`"
             >
           </div>
-          <div v-if="category.apply_filter" class="opacity-20 absolute inset-0 bg-black" />
+          <div v-if="category.images.apply_filter" class="opacity-20 absolute inset-0 bg-black" />
           <div class="absolute bottom-0 left-0 right-0 flex items-center justify-center h-full">
-            <h1 class="text-xl text-white">{{ category.name }}</h1>
+            <h2 class="text-2xl text-white">{{ category.name }}</h2>
           </div>
           <div class="absolute bottom-0 left-0 right-0 mb-8 text-center">
             <BaseButton outlined :to="`/category/${category.slug}/`">

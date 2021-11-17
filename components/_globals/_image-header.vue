@@ -3,22 +3,21 @@
     <article class="image-full-container relative overflow-hidden">
       <div class="table-cell align-middle">
         <img
-          :src="object.image_1536x660"
+          :src="object.images_1536x860"
           alt="Decorative background image"
           class="absolute bottom-0 left-0 right-0 object-cover w-full h-full"
-          :srcset="`${object.image_512x512} 512w,
-                    ${object.image_1024x1024} 1024w,
-                    ${object.image_1024x480} 1024w,
-                    ${object.image_1536x660} 1536w,
-                    ${object.image_2048x800} 2048w,
-                    ${object.image_2560x940} 2560w,
-                    ${object.image_3072x940} 3072w`"
+          :srcset="`${object.images.image_512x512} 512w,
+                    ${object.images.image_640x275} 640w,
+                    ${object.images.image_1024x1024} 1024w,
+                    ${object.images.image_1024x575} 1024w,
+                    ${object.images.image_1536x860} 1536w,
+                    ${object.images.image_2048x1150} 2048w`"
         >
         <div v-if="object.apply_filter" class="opacity-20 absolute inset-0 bg-black" />
         <div class="absolute bottom-0 left-0 right-0 flex items-center justify-center h-full px-4">
           <div class="text-center">
             <slot>
-              <h1 class="text-2xl font-semibold text-white">{{ object.name }}</h1>
+              <h2 class="text-2xl font-medium text-white">{{ object.name }}</h2>
             </slot>
           </div>
         </div>
@@ -71,91 +70,37 @@ export default defineComponent({
     width: 100%;
   }
 
-  .image-half-container {
-    height: 375px;
-    width: 100%;
-  }
-
   @media (min-width: 640px) {
     .image-full-container {
-      height: 300px;
-      width: 100%;
-    }
-
-    .image-half-container {
-      height: 300px;
+      height: 330px;
       width: 100%;
     }
   }
 
   @media (min-width: 768px) {
     .image-full-container {
-      height: 366px;
-      width: 100%;
-    }
-
-    .image-half-container {
-      height: 366px;
+      height: 370px;
       width: 100%;
     }
   }
 
-  @media (min-width:1024px) {
+  @media (min-width: 1024px) {
     .image-full-container {
-      height: 480px;
-      width: 100%;
-    }
-
-    .image-half-container {
-      height: 480px;
-      width: 100%;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .image-full-container {
-      height: 660px;
-      width: 100%;
-    }
-
-    .image-half-container {
-      height: 660px;
+      height: 575px;
       width: 100%;
     }
   }
 
   @media (min-width: 1536px) {
     .image-full-container {
-      height: 800px;
-      width: 100%;
-    }
-
-    .image-half-container {
-      height: 800px;
+      height: 860px;
       width: 100%;
     }
   }
 
   @media (min-width: 2048px) {
     .image-full-container {
-      height: 800px;
-      width: 100%;
-    }
-
-    .image-half-container {
-      height: 800px;
-      width: 100%;
-    }
-  }
-
-  @media (min-width: 3072px) {
-    .image-full-container {
-      height: 940px;
-      width: 100%;
-    }
-
-    .image-half-container {
-      height: 940px;
+      height: 1150px;
       width: 100%;
     }
   }
