@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="object.images">
     <article class="image-full-container relative overflow-hidden">
       <div class="table-cell align-middle">
         <img
