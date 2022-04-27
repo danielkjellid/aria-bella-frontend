@@ -111,13 +111,13 @@ export default {
   methods: {
     fetchCategory() {
       const category = this.$route.params.categorySlug
-      this.$axios.get(`categories/${category}/`).then(category => {
+      this.$axios.get(`categories/category/${category}/`).then(category => {
         this.category = category.data
       })
     },
     fetchSubCategories() {
       const category = this.$route.params.categorySlug
-      this.$axios.get(`categories/${category}/subcategories/`).then(category => {
+      this.$axios.get(`categories/category/${category}/children/`).then(category => {
         this.subCategories = category.data
         this.loaded = true
       })

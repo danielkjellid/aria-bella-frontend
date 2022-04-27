@@ -42,8 +42,7 @@
                           </BaseButton>
                         </div>
                       </div>
-                      <ProductFilterBlock :loading="fetchState.pending" title="Stil" :items="availableFilters.styles" :activeFilters="filters" @toggle-filter="toggleFilter" />
-                      <ProductFilterBlock :loading="fetchState.pending" title="Bruksområde" :items="availableFilters.applications" :activeFilters="filters" @toggle-filter="toggleFilter" />
+                      <ProductFilterBlock :loading="fetchState.pending" title="Fasonger" :items="availableFilters.shapes" :activeFilters="filters" @toggle-filter="toggleFilter" />
                       <ProductFilterBlock :loading="fetchState.pending" title="Materiale" :items="availableFilters.materials" :activeFilters="filters" @toggle-filter="toggleFilter" />
                       <ProductFilterBlock :loading="fetchState.pending" title="Farger" :items="availableFilters.colors" :activeFilters="filters" @toggle-filter="toggleFilter">
                         <template #box="{ item }">
@@ -62,8 +61,7 @@
       <TransformFadeIn>
         <div v-show="filterMenuActive" class="lg:block hidden mt-8">
           <div class="grid grid-cols-5 gap-3">
-            <ProductFilterBlock :loading="fetchState.pending" title="Stil" :items="availableFilters.styles" :activeFilters="filters" @toggle-filter="toggleFilter" />
-            <ProductFilterBlock :loading="fetchState.pending" title="Bruksområde" :items="availableFilters.applications" :activeFilters="filters" @toggle-filter="toggleFilter" />
+            <ProductFilterBlock :loading="fetchState.pending" title="Fasonger" :items="availableFilters.shapes" :activeFilters="filters" @toggle-filter="toggleFilter" />
             <ProductFilterBlock :loading="fetchState.pending" title="Materiale" :items="availableFilters.materials" :activeFilters="filters" @toggle-filter="toggleFilter" />
             <ProductFilterBlock :loading="fetchState.pending" title="Farger" :items="availableFilters.colors" :activeFilters="filters" @toggle-filter="toggleFilter">
               <template #box="{ item }">
@@ -240,8 +238,7 @@ export default defineComponent({
       slug: string
       categories: ProductMetaObj[]
       colors: ProductMetaObj[]
-      styles: ProductMetaObj[]
-      applications: ProductMetaObj[]
+      shapes: ProductMetaObj[]
       materials: ProductMetaObj[]
       thumbnail: string
       variants: ProductMetaObj[]
@@ -256,6 +253,8 @@ export default defineComponent({
     const currentCategory = computed(() => {
       return route.value.params.categorySlug
     })
+
+    console.log(route.value)
 
     const currentSubCategory = computed(() => {
       return route.value.params.subCategorySlug
@@ -312,7 +311,7 @@ export default defineComponent({
     })
 
     const searchEndpoint = () => {
-      $axios.$get(`categories/${currentSubCategory.value}/products/?search=${search.value}`)
+      $axios.$get(`categories/category/${currentSubCategory.value}/products/?search=${search.value}`)
         .then(products => {
           fetchedProducts.value = products
           loaded.value = true
@@ -335,26 +334,23 @@ export default defineComponent({
 
     const availableFilters = computed(() => {
       interface TempArrayObj {
-        styles: ProductMetaObj[]
-        applications: ProductMetaObj[]
+        shapes: ProductMetaObj[]
         materials: ProductMetaObj[]
         colors: ProductMetaObj[]
       }
 
       let filters = {
-        styles: [],
-        applications: [],
+        shapes: [],
         materials: [],
         colors: []
       } as TempArrayObj
 
       // create a temporary array of fields
-      let tempArray: TempArrayObj = {styles: [], applications: [], materials: [], colors: []}
+      let tempArray: TempArrayObj = {shapes: [], materials: [], colors: []}
 
       // concat each object in the respected array in the product list
       filteredProducts.value.map(product => {
-        product.styles.map(style => tempArray.styles.push(style))
-        product.applications.map(application => tempArray.applications.push(application))
+        product.shapes.map(shape => tempArray.shapes.push(shape))
         product.materials.map(material => tempArray.materials.push(material))
         product.colors.map(color => tempArray.colors.push(color))
       })
@@ -362,7 +358,7 @@ export default defineComponent({
       // function to add an instance of an element to the filters object
       let appendFilter = (array: ProductMetaObj[], destination: string) => {
 
-        type DestinationArray = 'styles' | 'applications' | 'materials' | 'colors'
+        type DestinationArray = 'shapes' | 'materials' | 'colors'
 
         // map the array arg
         array.map(element => {
@@ -396,8 +392,7 @@ export default defineComponent({
       }
 
       // append filters to the filter object
-      appendFilter(tempArray.styles, 'styles')
-      appendFilter(tempArray.applications, 'applications')
+      appendFilter(tempArray.shapes, 'shapes')
       appendFilter(tempArray.materials, 'materials')
       appendFilter(tempArray.colors, 'colors')
 
@@ -409,8 +404,7 @@ export default defineComponent({
       // check each product filter if any values is inside the selectedFilter array
       const productList = products.value.filter((product: ProductObj) =>
         filters.value.every(filter =>
-          product.styles.some(style => style.name === filter) ||
-          product.applications.some(application => application.name === filter) ||
+          product.shapes.some(shape => shape.name === filter) ||
           product.materials.some(material => material.name === filter) ||
           product.colors.some(color => color.name === filter)
         )
@@ -435,8 +429,8 @@ export default defineComponent({
     }
 
     const { fetch, fetchState } = useFetch(async () => {
-      category.value = await $axios.$get(`categories/subcategory/${currentSubCategory.value}/`)
-      fetchedProducts.value = await $axios.$get(`categories/${currentSubCategory.value}/products/`)
+      category.value = await $axios.$get(`categories/category/${currentSubCategory.value}/`)
+      fetchedProducts.value = await $axios.$get(`categories/category/${currentSubCategory.value}/products/`)
     })
 
     watch(query, (currentValue, oldValue) => {

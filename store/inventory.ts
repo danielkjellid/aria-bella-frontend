@@ -16,7 +16,7 @@ export const actions = {
   },
   fetchNavbarCategories: async function({ commit }: {commit: Function}) {
 
-    const categories = await (this as any).$axios.$get('categories/navigation/')
+    const categories = await (this as any).$axios.$get('categories/')
       .catch((error: string) => {
         console.log(error)
       })

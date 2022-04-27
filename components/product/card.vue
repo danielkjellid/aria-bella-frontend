@@ -9,7 +9,7 @@
       <div class="product-media relative overflow-hidden bg-gray-100">
         <img :src="productImage" :alt="`Image of ${product.name}`">
         <div class="absolute bottom-0 left-0 mb-6">
-          <div v-show="product.site_state.can_be_purchased_online" class="py-1 pl-2 pr-3 text-sm font-semibold text-white bg-gray-900 bg-opacity-75 rounded-r-full">Kan kjøpes på nett</div>
+          <!--          <div v-show="product.site_state.can_be_purchased_online" class="py-1 pl-2 pr-3 text-sm font-semibold text-white bg-gray-900 bg-opacity-75 rounded-r-full">Kan kjøpes på nett</div>-->
           <!-- TODO: add logic to check if product is part of campagin -->
           <!-- <div class="inline-block py-1 pl-2 pr-3 mt-2 text-sm font-semibold text-white bg-indigo-600 rounded-r-full">-20%</div> -->
         </div>
@@ -17,7 +17,7 @@
       <div class="product-info pt-4 pb-1">
         <div v-if="!showVariants" class="flex items-center justify-between">
           <p class="w-1/2 text-base font-semibold text-gray-900 truncate">{{ product.name }}</p>
-          <p v-if="product.site_state.display_price" class="w-1/2 text-sm font-semibold text-right text-gray-900">fra {{ product.site_state.gross_price | formatPrice }} <span class="text-gray-500">{{ product.unit }}</span></p>
+          <p v-if="product.display_price" class="w-1/2 text-sm font-semibold text-right text-gray-900">fra {{ product.gross_price | formatPrice }} <span class="text-gray-500">{{ product.unit }}</span></p>
           <!-- TODO: add logic for discounted products -->
           <!-- <p class="text-sm font-semibold text-gray-900">
             <span class="text-gray-500"><strike>kr 499,00</strike></span> - old price

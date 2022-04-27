@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-5">
+  <div v-if="items.length > 0" class="mb-5">
     <h3 class="px-3 text-sm font-semibold leading-4 tracking-wide text-gray-400 uppercase">
       {{ title }}
     </h3>

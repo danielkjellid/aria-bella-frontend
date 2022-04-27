@@ -56,12 +56,10 @@
         <article
           v-for="category in categories"
           :key="category.id"
-          class="relative overflow-hidden"
-          :class="category.width === 'full' ? 'col-span-2 image-full-container' : 'col-span-2 sm:col-span-1 image-half-container'"
+          class="relative overflow-hidden col-span-2 image-full-container"
         >
           <div class="table-cell align-middle">
             <img
-              v-if="category.width === 'full'"
               :src="category.images.image_1536x860"
               :alt="`Placeholder image for the ${category.name} category.`"
               class="absolute bottom-0 left-0 right-0 object-cover w-full h-full"
@@ -71,15 +69,7 @@
                         ${category.images.image_1024x575} 1024w,
                         ${category.images.image_1536x860} 1536w,
                         ${category.images.image_2048x1150} 2048w`"
-            >
-            <img
-              v-else
-              :src="category.images.image_1024x1024"
-              :alt="`Placeholder image of the ${category.name} category.`"
-              class="object-cover"
-              :srcset="`${category.images.image_512x512} 512w,
-                        ${category.images.image_1024x1024} 1024w`"
-            >
+            />
           </div>
           <div v-if="category.images.apply_filter" class="opacity-20 absolute inset-0 bg-black" />
           <div class="absolute bottom-0 left-0 right-0 flex items-center justify-center h-full">
@@ -114,7 +104,7 @@ export default defineComponent({
     const categories = ref({})
 
     const { fetch, fetchState } = useFetch(async () => {
-      categories.value = await $axios.$get('categories/')
+      categories.value = await $axios.$get('categories/parents/')
     })
 
     fetch()
@@ -133,18 +123,8 @@ export default defineComponent({
     width: 100%;
   }
 
-  .image-half-container {
-    height: 375px;
-    width: 100%;
-  }
-
   @media (min-width: 640px) {
     .image-full-container {
-      height: 300px;
-      width: 100%;
-    }
-
-    .image-half-container {
       height: 300px;
       width: 100%;
     }
@@ -155,20 +135,10 @@ export default defineComponent({
       height: 366px;
       width: 100%;
     }
-
-    .image-half-container {
-      height: 366px;
-      width: 100%;
-    }
   }
 
   @media (min-width:1024px) {
     .image-full-container {
-      height: 480px;
-      width: 100%;
-    }
-
-    .image-half-container {
       height: 480px;
       width: 100%;
     }
@@ -179,20 +149,10 @@ export default defineComponent({
       height: 660px;
       width: 100%;
     }
-
-    .image-half-container {
-      height: 660px;
-      width: 100%;
-    }
   }
 
   @media (min-width: 1536px) {
     .image-full-container {
-      height: 800px;
-      width: 100%;
-    }
-
-    .image-half-container {
       height: 800px;
       width: 100%;
     }
@@ -203,20 +163,10 @@ export default defineComponent({
       height: 800px;
       width: 100%;
     }
-
-    .image-half-container {
-      height: 800px;
-      width: 100%;
-    }
   }
 
   @media (min-width: 3072px) {
     .image-full-container {
-      height: 940px;
-      width: 100%;
-    }
-
-    .image-half-container {
       height: 940px;
       width: 100%;
     }
