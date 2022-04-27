@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <BaseNavbar />
     <main>
-      <BaseImageheader :object="category" />
+      <BaseImageHeader :object="category" />
       <div class="container max-w-screen-xl min-h-screen mx-auto">
         <BaseBreadcrumbs :breadcrumbs="breadcrumbs" class="px-4 py-8" />
         <section class="xl:px-0 px-4 pb-8">
@@ -72,8 +70,6 @@
         </section>
       </div>
     </main>
-    <BaseFooter />
-  </div>
 </template>
 
 <script>
