@@ -33,7 +33,7 @@ export default function initializeAxiosInterceptors(
 
             context.route.meta?.map((meta: object) => {
               if ((meta as any).authRequired || (meta as any).staffRequired) {
-                redirect('/konto/logg-inn/')
+                redirect('/account/log-inn/')
               }
             })
 
@@ -81,7 +81,7 @@ export default function initializeAxiosInterceptors(
             // is refresh token is expired, redirect to login to obtain new pair if route requires auth
             context.route.meta?.map((meta: object) => {
               if ((meta as any).authRequired || (meta as any).staffRequired) {
-                redirect('/konto/logg-inn/')
+                redirect('/account/log-in/')
               }
             })
 
@@ -91,7 +91,7 @@ export default function initializeAxiosInterceptors(
           // if refresh token is missing, redirect to login to obtain a new pair if route requires auth
           context.route.meta?.map((meta: object) => {
             if ((meta as any).authRequired || (meta as any).staffRequired) {
-              redirect('/konto/logg-inn/')
+              redirect('/account/log-in/')
             }
           })
 

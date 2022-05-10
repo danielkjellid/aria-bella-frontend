@@ -402,6 +402,8 @@ export default defineComponent({
 
     const variants = computed(() => {
       const variants = product.value.options.map(option => option.variant)
+        .filter(size => size) // @ts-ignore
+        .reduce((prev, curr) => prev.concat(prev.find(variant => variant.id === curr.id) ? [] : [curr]), [])
 
       if (variants.length) {
         return variants
@@ -411,6 +413,8 @@ export default defineComponent({
 
     const sizes = computed(() => {
       const sizes = product.value.options.map(option => option.size)
+        .filter(size => size) // @ts-ignore
+        .reduce((prev, curr) => prev.concat(prev.find(size => size.id === curr.id) ? [] : [curr]), [])
 
       if (sizes.length) {
         return sizes
