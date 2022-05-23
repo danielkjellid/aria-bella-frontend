@@ -10,9 +10,7 @@
     </div>
 
     <div class="mt-5 text-sm text-gray-700">
-      <div v-if="loaded">
-        <p>{{ text }}</p>
-      </div>
+      <div v-if="loaded" v-html="text" />
       <div v-else class="animate-pulse space-y-2">
         <div class="h-4 bg-gray-400 rounded" />
         <div class="w-5/6 h-4 bg-gray-400 rounded" />
