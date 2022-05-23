@@ -198,7 +198,7 @@
                 </tr>
                 <tr>
                   <td class="text-sm text-gray-700">Opprinnelse</td>
-                  <td class="text-sm text-gray-900">{{ product.origin_country }}</td>
+                  <td class="text-sm text-gray-900">{{ product.supplier.origin_country }}</td>
                 </tr>
               </tbody>
             </table>

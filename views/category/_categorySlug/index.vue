@@ -16,13 +16,13 @@
               >
                 <img
                   v-if="loaded"
-                  :src="subcategory.images.image600x440"
+                  :src="subcategory.list_images.image600x440"
                   alt=""
                   class="absolute inset-0 object-cover w-full h-full"
                   :srcset="
-                    `${subcategory.images.image500x305} 500w,
-                          ${subcategory.images.image600x440} 600w,
-                          ${subcategory.images.image850x520} 850w`
+                    `${subcategory.list_images.image500x305} 500w,
+                          ${subcategory.list_images.image600x440} 600w,
+                          ${subcategory.list_images.image850x520} 850w`
                   "
                 />
                 <div v-else class="animate-pulse image-container h-4 bg-gray-400 rounded" />
